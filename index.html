@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>সহজ আয়</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f1f5fb;
+      color: #1e293b;
+    }
+
+    header {
+      background: #0756c9;
+      color: white;
+      padding: 22px 16px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 30px;
+    }
+
+    header p {
+      margin-bottom: 0;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      padding: 16px;
+    }
+
+    .balance {
+      background: white;
+      padding: 22px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 3px 12px #00000010;
+    }
+
+    .balance h2 {
+      color: #0756c9;
+      margin: 8px 0;
+      font-size: 32px;
+    }
+
+    .title {
+      margin-top: 25px;
+    }
+
+    .task {
+      background: white;
+      padding: 16px;
+      margin: 12px 0;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .task h3 {
+      margin: 0 0 7px;
+      font-size: 17px;
+    }
+
+    .task p {
+      margin: 0;
+      color: #64748b;
+      font-size: 13px;
+    }
+
+    .price {
+      color: #087f43;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+
+    button {
+      background: #0756c9;
+      color: white;
+      border: none;
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .withdraw {
+      display: block;
+      width: 100%;
+      margin-top: 20px;
+      padding: 15px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #64748b;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>সহজ আয়</h1>
+    <p>ছোট কাজ করুন, সহজে আয় করুন!</p>
+  </header>
+
+  <main class="container">
+
+    <section class="balance">
+      <p>আপনার বর্তমান ব্যালেন্স</p>
+      <h2>৳০.০০</h2>
+      <p>কাজ সম্পন্ন করে আয় শুরু করুন</p>
+    </section>
+
+    <h2 class="title">📋 উপলব্ধ কাজ</h2>
+
+    <div class="task">
+      <div>
+        <h3>ওয়েবসাইট ভিজিট</h3>
+        <p>ওয়েবসাইট দেখে নির্দিষ্ট তথ্য খুঁজুন</p>
+      </div>
+      <div>
+        <div class="price">৳৬</div>
+        <br>
+        <button onclick="alert('এটি নমুনা। প্রকৃত কাজ জমা দেওয়ার ব্যবস্থা পরে যোগ হবে।')">কাজ দেখুন</button>
+      </div>
+    </div>
+
+    <div class="task">
+      <div>
+        <h3>তথ্য যাচাই</h3>
+        <p>দেওয়া তথ্য সঠিক কি না যাচাই করুন</p>
+      </div>
+      <div>
+        <div class="price">৳৬</div>
+        <br>
+        <button onclick="alert('এটি নমুনা। প্রকৃত কাজ জমা দেওয়ার ব্যবস্থা পরে যোগ হবে।')">কাজ দেখুন</button>
+      </div>
+    </div>
+
+    <div class="task">
+      <div>
+        <h3>অনলাইন সার্ভে</h3>
+        <p>অনুমোদিত সার্ভেতে অংশ নিন</p>
+      </div>
+      <div>
+        <div class="price">৳৬</div>
+        <br>
+        <button onclick="alert('এটি নমুনা। প্রকৃত কাজ জমা দেওয়ার ব্যবস্থা পরে যোগ হবে।')">কাজ দেখুন</button>
+      </div>
+    </div>
+
+    <button class="withdraw" onclick="alert('টাকা তোলার ব্যবস্থা পরবর্তী ধাপে যুক্ত হবে।')">
+      💳 টাকা উত্তোলন
+    </button>
+
+  </main>
+
+  <footer>
+    © ২০২৬ সহজ আয় | নিরাপদে কাজ করুন
+  </footer>
+
+</body>
+</html>
