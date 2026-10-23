@@ -85,6 +85,7 @@
     </section>
 
     <h2>📋 উপলব্ধ কাজ</h2>
+    <div id="taskList"></div> 
     <div class="task">
       <h3>ওয়েবসাইট ভিজিট</h3>
       <p>ওয়েবসাইট দেখে নির্দিষ্ট তথ্য খুঁজুন।</p>
@@ -110,7 +111,8 @@
       getAuth, createUserWithEmailAndPassword,
       signInWithEmailAndPassword, signOut, onAuthStateChanged
     } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
+    import { getFirestore, collection, getDocs }
+    from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
     const firebaseConfig = {
       apiKey: "AIzaSyAxVhwIMKZlU6o6-3VANlqJXye9k9P3KWI",
       authDomain: "shohoj-aay.firebaseapp.com",
@@ -123,7 +125,42 @@
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
+    const db = getFirestore(app);
+    async function loadTasks() {
+  const taskList = document.getElementById("taskList");
+  taskList.innerHTML = "<p>কাজ লোড হচ্ছে...</p>";
 
+  try {
+    const snapshot = await getDocs(collection(db, "tasks"));
+    taskList.innerHTML = "";
+
+    snapshot.forEach((doc) => {
+      const task = doc.data();
+      const card = document.createElement("div");
+      card.className = "task";
+
+      const title = document.createElement("h3");
+      title.textContent = task.title || "নতুন কাজ";
+
+      const description = document.createElement("p");
+      description.textContent = task.description || "";
+
+      const reward = document.createElement("p");
+      reward.className = "price";
+      reward.textContent = "পুরস্কার: ৳" + (task.reward ?? 0);
+
+      card.append(title, description, reward);
+      taskList.appendChild(card);
+    });
+
+    if (snapshot.empty) {
+      taskList.textContent = "এখনো কোনো কাজ যোগ করা হয়নি।";
+    }
+  } catch (error) {
+    taskList.textContent = "কাজ লোড হয়নি। Firestore Rules পরীক্ষা করতে হবে।";
+    console.error(error);
+  }
+}
     const emailInput = document.getElementById("email");
     const passwordInput = document.getElementById("password");
     const message = document.getElementById("message");
@@ -177,6 +214,7 @@
         userBox.classList.add("hidden");
       }
     });
+    loadTasks();
   </script>
 </body>
 </html>
