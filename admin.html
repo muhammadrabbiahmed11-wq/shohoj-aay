@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>সহজ আয় - অ্যাডমিন প্যানেল</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f4f8;
+      margin: 0;
+      padding: 20px;
+    }
+    .box {
+      max-width: 600px;
+      margin: 30px auto;
+      padding: 24px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px #ddd;
+    }
+    h1 { color: #0756c9; }
+    button {
+      background: #0756c9;
+      color: white;
+      padding: 12px 18px;
+      border: 0;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    #status { line-height: 1.8; }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>সহজ আয় — অ্যাডমিন প্যানেল</h1>
+    <div id="status">অ্যাকাউন্ট যাচাই হচ্ছে...</div>
+    <button id="logout" hidden>লগআউট</button>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from
+      "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import {
+      getAuth, onAuthStateChanged, signOut
+    } from
+      "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAxVhwIMKZlU6o6-3VANlqJXye9k9P3KWI",
+      authDomain: "shohoj-aay.firebaseapp.com",
+      projectId: "shohoj-aay",
+      storageBucket: "shohoj-aay.firebasestorage.app",
+      messagingSenderId: "802661422702",
+      appId: "1:802661422702:web:54d18d5fcb78910cf9387f",
+      measurementId: "G-Z2N5TFSWMG"
+    };
+
+    const ADMIN_UID = "SK9TnVuFFmNSKu3hPli7k5bsOC32";
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const status = document.getElementById("status");
+    const logout = document.getElementById("logout");
+
+    onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        status.textContent =
+          "প্রথমে মূল ওয়েবসাইটে লগইন করুন, তারপর এই পেজ খুলুন।";
+        logout.hidden = true;
+        return;
+      }
+
+      logout.hidden = false;
+
+      if (user.uid === ADMIN_UID) {
+        status.innerHTML =
+          "<strong>অ্যাডমিন হিসেবে প্রবেশ করেছেন।</strong><br>" +
+          "ইমেইল: " + user.email +
+          "<br><br>অ্যাডমিন প্যানেল প্রস্তুত। কাজ পরিচালনার ব্যবস্থা পরের ধাপে যোগ হবে।";
+      } else {
+        status.textContent = "দুঃখিত, আপনার অ্যাডমিন অনুমতি নেই।";
+      }
+    });
+
+    logout.addEventListener("click", async () => {
+      await signOut(auth);
+      location.reload();
+    });
+  </script>
+</body>
+</html>
